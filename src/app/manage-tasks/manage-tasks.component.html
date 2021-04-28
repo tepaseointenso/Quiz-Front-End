@@ -1,0 +1,134 @@
+<div class="container app">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="alert alert-sucess alert-dismissable" *ngIf="msg">
+                <a href="#" class="close" (click)="closeAlert()">
+                    &times;
+                </a>
+                {{msg}}
+            </div>
+        </div>
+    </div>
+    <div class="row">   
+        <div class="col-sm-8">    
+            <img src="https://i.pinimg.com/originals/06/e6/4f/06e64f936a783246c1bc4581e8507020.png" alt="Imagen" width="200">
+        </div> 
+        
+        <div class="col-sm-4">
+            <h2>Añadir tarea:</h2>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre de la tarea</mat-label>
+                        <input matInput [(ngModel)]="model.name" name="name" placeholder="Ingrese la tarea" required>
+                    </mat-form-field>
+                </div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Estado de la tarea</mat-label>
+                        <mat-select [(ngModel)]="model.status" name="status" required>
+                            <mat-option value="Iniciada">Iniciada</mat-option>
+                            <mat-option value="En Proceso">En Proceso</mat-option>
+                            <mat-option value="Finalizada">Finalizada</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <!-- <mat-form-field appearance="fill">
+                        <mat-label>Favorite food</mat-label>
+                        <mat-select [(ngModel)]="model.status" name="status">
+                          <mat-option *ngFor="let item of tasks" [value]="item.status">
+                            {{item.status}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+
+                    <div class="form-group">
+                        <a class="col-sm-10 col-sm-offset-2">
+
+                            <button type="submit" class="btn btn-success" (click)="addTask()">
+                                Guardar
+                            </button>
+                        </a>
+                        <a class="col-sm-10 col-sm-offset-2">
+                            <button type="reset" class="btn btn-danger">
+                                Cancelar
+                            </button>
+                        </a>
+                    </div>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Tareas Guardadas</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of tasks; let i = index">
+                            <td>{{item.name}}</td>
+                            <td>{{item.status}}</td>
+                            <td>
+                                <a (click)="editTask(i)"
+                                class="btn btn-success">
+                                    Editar
+                                </a>
+                            </td>
+                            <td>
+                                <a (click)="deleteTask(i)"
+                                class="btn btn-danger">
+                                    Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-4" [hidden]="hideEdit">
+            <h2>Modificar Tarea:</h2>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre de la tarea</mat-label>
+                        <input matInput [(ngModel)]="model2.name" name="name" placeholder="Ingrese la tarea">
+                    </mat-form-field>
+                </div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Estado de la tarea</mat-label>
+                        <mat-select [(ngModel)]="model2.status" name="status">
+                            <mat-option value="Iniciada">Iniciada</mat-option>
+                            <mat-option value="En Proceso">En Proceso</mat-option>
+                            <mat-option value="Finalizada">Finalizada</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                      <!-- <mat-form-field appearance="fill">
+                        <mat-label>Favorite food</mat-label>
+                        <mat-select [(ngModel)]="model.status" name="status">
+                          <mat-option *ngFor="let item of tasks" [value]="item.status">
+                            {{item.status}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+
+                    <div class="form-group">
+                        <a class="col-sm-10 col-sm-offset-2">
+
+                            <button type="submit" class="btn btn-success" (click)="updateTask()">
+                                Editar
+                            </button>
+                        </a>
+                        <a class="col-sm-10 col-sm-offset-2">
+                            <button type="reset" class="btn btn-danger">
+                                Cancelar
+                            </button>
+                        </a>
+                    </div>
+            </form>
+        </div>
+</div>
